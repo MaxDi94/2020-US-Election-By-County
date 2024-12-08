@@ -2,17 +2,21 @@
 
 **Project Overview**
 
-This project analyzes and visualizes presidential election results at the county level in the United States for 2020. It includes regression analysis, correlations, and geospatial visualizations to understand the factors influencing the vote share for different candidates, Donald J. Trump Jr. for the Republican Party and Josef R. Biden for the Democratic Party.
+This project analyzes and visualizes presidential election results at the county level in the United States for 2020. It includes regression analysis, correlations, and geospatial visualizations to understand the factors influencing the vote share for different candidates, Donald J. Trump Jr. for the Republican Party and Josef R. Biden for the Democratic Party. The datasets used in this project are election results, poverty rate, level of education, unemployment rate, rural-urban classification. All datasets are on county level identified by the FIPS code used by the US Census Bureau.
 
-First, the .csv files were uploaded into a relational database via SSMS 19 with a corresponding query to extract relevant data by joining all demographic tables to the election table. Data preparation was conducted mainly in SSMS by cleaning up the raw data, setting appropriate data types and aggregating/grouping the data by county. In Jupyter Notebook data analysis was conducted by determining correlation, regression and building plots.
+Presidential Election results are reported on the precinct level, which is the most granular and on the county level. I choose the county level election data, as counties and county equivalents are administrative units usually used by the US Census Bureau to provide demographic data. The next higher level would be the state which also ultimately decides the electors to vote for a presidential candidate. Of all 3,155 counties and county equivalents, the Republican Party won 2,596 and the Democratic Party 559. The Democratic Party won the election nonetheless, by number of electors and also by popular vote. Democrat-won counties are much more populous which is also reflected in the analysis. 
 
-Performing a left join in the SQL query to keep all data from the election dataset. Some counties like Puerto Rico, overseas territories etc. do not vote in presidential elections. At the same time some districts which were included in the county breakdown of the election dataset were not included in the census datasets, therefore not all counties of the election dataset have matches. For subsequent analysis these were dropped from the dataset.  
+First, the .csv files were uploaded into a relational database via SSMS 19 with a corresponding query to extract relevant data by joining all demographic tables to the election table. Data preparation was conducted mainly in SSMS by cleaning up the raw data, setting appropriate data types, developing relations, and aggregating/grouping the data by county. In Jupyter Notebook data analysis was conducted by determining correlation, regression and building plots.
+
+Performing a left join in the SQL query to keep all data from the election dataset. Some counties like Puerto Rico, overseas territories etc. do not vote in presidential elections. At the same time some districts which were included in the county breakdown of the election dataset were not included in the census datasets, therefore not all counties of the election dataset have matches. For subsequent analysis these were dropped from the dataset. 
 
 **Election result map**
 
 ![county_level_election_result_map](https://github.com/user-attachments/assets/626a5d8d-183e-4d46-9afd-10a1cdd3fc44)
 
 Alaska has been dropped because the Alaskan county system differs from the shapefile
+
+
 
 **1. Analysis - Correlation**
 
