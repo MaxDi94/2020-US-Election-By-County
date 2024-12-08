@@ -1,4 +1,4 @@
-**United States Presidential Election of 2020 by County**
+**Analysis of the United States Presidential Election of 2020 by County with key demographics**
 
 **Project Overview**
 
@@ -6,41 +6,7 @@ This project analyzes and visualizes presidential election results at the county
 
 First, the .csv files were uploaded into a relational database via SSMS 19 with a corresponding query to extract relevant data by joining all demographic tables to the election table. Data preparation was conducted mainly in SSMS by cleaning up the raw data, setting appropriate data types and aggregating/grouping the data by county. In Jupyter Notebook data analysis was conducted by determining correlation, regression and building plots.
 
-**SQL Query**
-
-query = """
-SELECT c.state,
-       c.party,
-       c.county_name,
-       c.county_fips,
-       c.candidate,
-       SUM(c.candidatevotes) AS candidatevotes,  -- Sum candidate votes
-       SUM(c.totalvotes) AS totalvotes,          -- Sum total votes
-       CAST(SUM(c.candidatevotes) AS DECIMAL(18, 2)) / NULLIF(CAST(SUM(c.totalvotes) AS DECIMAL(18, 2)), 0) * 100 AS voteshare,
-       p.PCTPOVALL_2021 AS poverty_rate,
-       u.Unemployment_rate_2020,
-       e.Percent_of_adults_with_less_than_a_high_school_diploma_2018_22 AS less_HS,
-       e.Percent_of_adults_with_a_high_school_diploma_only_2018_22 AS HS,
-       e.Percent_of_adults_with_a_bachelor_s_degree_or_higher_2018_22 AS bachelor,
-       pop.R_INTERNATIONAL_MIG_2021 AS int_mig,
-       pop.R_NET_MIG_2021 AS total_mig,
-       pop.Rural_Urban_Continuum_Code_2023 AS rucc
-FROM elec_county.dbo.countypres AS c
-LEFT JOIN elec_county.dbo.poverty AS p ON c.county_fips = p.FIPS_Code
-LEFT JOIN elec_county.dbo.unemployment AS u ON c.county_fips = u.FIPS_Code
-LEFT JOIN elec_county.dbo.Education AS e ON c.county_fips = e.FIPS_Code
-LEFT JOIN elec_county.dbo.PopulationEstimates AS pop ON c.county_fips = pop.FIPStxt
-WHERE c.year = 2020
-GROUP BY c.state, c.party, c.county_name, c.county_fips, c.candidate, c.year, p.PCTPOVALL_2021, u.Unemployment_rate_2020,
-         e.Percent_of_adults_with_less_than_a_high_school_diploma_2018_22,
-         e.Percent_of_adults_with_a_high_school_diploma_only_2018_22,
-         e.Percent_of_adults_with_a_bachelor_s_degree_or_higher_2018_22,
-         pop.R_INTERNATIONAL_MIG_2021, pop.R_NET_MIG_2021,
-         pop.Rural_Urban_Continuum_Code_2023
-ORDER BY c.year, c.county_fips;
-"""
-
-Performing a left join to keep all data from the election dataset. Some counties like Puerto Rico, overseas territories etc. do not vote in presidential election. At the same time some districts which were included in the county breakdown of the election were not included in the census datasets, therefore not all counties of the election dataset have matches. For subsequent analysis these were dropped. 
+Performing a left join in the SQL query to keep all data from the election dataset. Some counties like Puerto Rico, overseas territories etc. do not vote in presidential elections. At the same time some districts which were included in the county breakdown of the election dataset were not included in the census datasets, therefore not all counties of the election dataset have matches. For subsequent analysis these were dropped from the dataset.  
 
 **Election result map**
 
