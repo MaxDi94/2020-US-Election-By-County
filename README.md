@@ -1,25 +1,18 @@
-🗳️ United States Presidential Election of 2020
+**United States Presidential Election of 2020 by County**
 
-📋 Project Overview
+**Project Overview**
+
 This project analyzes and visualizes presidential election results at the county level in the United States for 2020. It includes regression analysis, diagnostic plots, and geospatial visualizations to understand the factors influencing the vote share for different parties (Republican and Democrat).
+First, the .csv files were uploaded into a relational database via SSMS 19 with a corresponding query to extract relevant data by joining all demographic tables to the election table. Data preparation was conducted mainly in SSMS by cleaning up the raw data, setting appropriate data types and aggregating/grouping the data by county. In Jupyter Notebook data analysis was conducted by determining correlation, regression and building plots.
 
-📊 Key Features
-Scatter Plots with Regression Lines
-Generates scatter plots to visualize the relationship between various socioeconomic factors (e.g., poverty rate, unemployment rate) and Republican vote share.
+**Election result map**
 
-Regression Diagnostics
-Provides diagnostic plots for regression models, including:
+![county_level_election_result_map](https://github.com/user-attachments/assets/626a5d8d-183e-4d46-9afd-10a1cdd3fc44)
 
-Residuals vs Fitted
-Normal Q-Q Plot
-Scale-Location Plot
-Residuals vs Leverage
-County-Level Heatmap
-Creates a heatmap displaying the election results on a US county map, color-coded by the winning party.
 
-⚙️ Dependencies
-To run this project, you'll need the following Python libraries:
+**Dependencies**
 
+To run this project you need the following Python libraries:
 matplotlib
 seaborn
 geopandas
@@ -27,37 +20,18 @@ pandas
 numpy
 statsmodels
 
-📦 Installation
+**Installation**
+
 Clone the Repository
 
-bash
-Copy code
-git clone https://github.com/yourusername/Election-Analysis-Project.git
-cd Election-Analysis-Project
+git clone https://github.com/MaxDi94/2020-US-Election-By-County.git
+cd 2020-US-Election-By-County
 Install Dependencies
 
-bash
-Copy code
 pip install -r requirements.txt
 
-🚀 How to Run the Project
-Prepare the Data
-Ensure you have the following data files in the data/ folder:
+**Data Sources**
 
-election_results.csv (containing election data and socioeconomic factors)
-tl_2020_us_county.shp (shapefile for US counties)
-Execute the Main Script
-
-Run the main Python script:
-
-bash
-Copy code
-python main.py
-View the Output
-
-Scatter plots and regression diagnostics will be saved in the outputs/ folder.
-The county-level heatmap will also be saved as an image in the outputs/ folder.
-
-🗺️ Data Sources
-Election Data: 
-Shapefile: https://www.census.gov/cgi-bin/geo/shapefiles/ (Select year: 2020 / Select a layer type: County (and equivalent)
+Election Data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ (Presidential Election from 2000-2020 on county level)
+Shapefile: https://www.census.gov/cgi-bin/geo/shapefiles/ (Select year: 2020 / Seect a layer type: County (and equivalent)
+Poverty, Education, Populatio, Employment, Migration Data: US Census Bureau
