@@ -10,7 +10,18 @@ First, the .csv files were uploaded into a relational database via SSMS 19 with 
 
 Performing a left join in the SQL query to keep all data from the election dataset. Some counties like Puerto Rico, overseas territories etc. do not vote in presidential elections. At the same time some districts which were included in the county breakdown of the election dataset were not included in the census datasets, therefore not all counties of the election dataset have matches. For subsequent analysis these were dropped from the dataset. 
 
-**Election result map**
+**Explanation of Independent Variables**
+
+Poverty Rate (2020) - The U.S. Census Bureau defines the poverty rate as the percentage of people living in households whose income is below the poverty threshold.
+
+Percentage of Population with less than a High School Degree (2020) - The U.S. Census Bureau defines the percentage of the population with less than a high school degree as the proportion of individuals aged 25 and older who have not completed high school.
+
+Unemployment Rate (2020) - The unemployment rate is defined by the U.S. Census Bureau (and other government agencies, like the Bureau of Labor Statistics) as the percentage of people in the labor force who are unemployed and actively seeking work.
+
+RUCC (Rural-Urban-Continuum Code) (2023) - RUCC was developed by the U.S. Department of Agriculture to categorize counties based on their level of urbanization and proximity to metropolitan areas. It ranges from 1-9 with 1 being most urban and 9 being most rural. 1-3 are considered urban, 4-6 are considered suburban and 7-9 are considered rural.
+
+
+**Election Result Map on County Level**
 
 ![county_level_election_result_map](https://github.com/user-attachments/assets/626a5d8d-183e-4d46-9afd-10a1cdd3fc44)
 
@@ -18,7 +29,7 @@ Alaska has been dropped because the Alaskan county system differs from the shape
 
 
 
-**1. Analysis - Correlation**
+**1. Analysis - Pearson Correlation**
 
 **Poverty Rate vs Vote Share**
 
@@ -156,10 +167,17 @@ RUCC: -0.9233 (p-value = 0.000)
 More rural areas are associated with a significant decrease in Democrat vote share.
 
 
+**Conclusion**
+The strongest correlation for both parties can be observed for changes in the RUCC. Rural areas tend to vote Republican and Urban areas tend to vote Democrat. In general exit polls suggest a similar tendency. For the poverty rate, there is a slightly weak negative correlation to the Republican vote share, suggesting counties with a higher poverty rate to vote less Republican. This is somewhat in line with polling as low-income individuals tend to vote more democrat whereas high-income individuals tend to vote more Republican. This is also reflected by a related variable, unemployment rate, which if higher, tends to be accompanied by more votes for the Democratic party and vice-versa.
+
+Another indicator for voting patterns is education. Polls suggest poorly educated voters tend to vote more Republican. This is reflected in the regression analysis with a coefficient of 0.4689 for the percentage of people with less than a High School diploma and Republican vote share.
+
+
+**Limitations**
+Variables are limited, other variables generally deemed significant for voting choices like race are not included. Counties can be politically quite diverse and some are highly contested. Geographic location of counties is not being controlled for. Some rural areas in the Northeast still vote solidly Democrat and some urban areas in the Midwest vote solidly Republican.
+
 
 **Dependencies**
-
-To run this project you need the following Python libraries:
 matplotlib
 seaborn
 geopandas
@@ -168,12 +186,8 @@ numpy
 statsmodels
 
 **Installation**
-
-Clone the Repository
-
 git clone https://github.com/MaxDi94/2020-US-Election-By-County.git
 cd 2020-US-Election-By-County
-Install Dependencies
 
 pip install -r requirements.txt
 
